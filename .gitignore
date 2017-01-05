@@ -1,5 +1,7 @@
 coverage/
+dist/
 node_modules/
 src/**/*.d.ts
 src/**/*.js
 src/**/*.map
+npm-debug.log
