@@ -17,10 +17,9 @@ export class ConfigurationService {
 	 */
 	public getKeys(): string[] {
 		let keys: string[] = [];
+		// tslint:disable-next-line:forin
 		for (let key in this.configValues) {
-			if (this.configValues.hasOwnProperty(key)) {
-				keys.push(key);
-			}
+			keys.push(key);
 		}
 		return keys;
 	}
