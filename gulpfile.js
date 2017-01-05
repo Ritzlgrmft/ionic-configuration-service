@@ -7,12 +7,3 @@ var gulp = require('gulp');
 gulp.task("clean", function () {
 	return del(["dist", "src/*.js", "src/*.map", "src/*.d.ts"]);
 });
-
-/**
- * Prepare release by copying the needed files to dist folder.
- */
-gulp.task("prepare-release", function () {
-	return gulp
-		.src(["src/*.js", "src/*.d.ts", "!src/*.spec.*",])
-		.pipe(gulp.dest("dist"));
-});

@@ -14,11 +14,11 @@
 		"clean": "gulp clean",
 		"commit": "git-cz",
 		"lint": "tslint --project tsconfig.json --format verbose",
-		"precommit": "npm run test-once",
-		"prepare-release": "gulp prepare-release",
+		"precommit": "npm run validate",
 		"test": "karma start karma.conf.js",
 		"test-once": "karma start karma.conf.js --single-run",
-		"tsc": "tsc"
+		"tsc": "tsc",
+		"validate": "npm run test-once && npm run lint"
 	},
 	"files": [
 		"dist"
