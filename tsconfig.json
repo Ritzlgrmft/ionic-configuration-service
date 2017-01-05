@@ -2,6 +2,7 @@
 	"compilerOptions": {
 		"target": "es5",
 		"module": "commonjs",
+		"moduleResolution": "node",
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"noFallthroughCasesInSwitch": true,
@@ -10,8 +11,15 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"declaration": true,
-		"sourceMap": true
+		"sourceMap": false,
+		"outDir": "dist"
 	},
+	"include": [
+		"src/**/*.ts"
+	],
+	"exclude": [
+		"src/**/*.spec.ts"
+	],
 	"compileOnSave": false,
 	"atom": {
 		"rewriteTsconfig": false
