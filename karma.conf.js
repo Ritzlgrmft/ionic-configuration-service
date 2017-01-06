@@ -31,8 +31,6 @@ module.exports = function (config) {
 				"html": "coverage",
 				"lcovonly": "coverage",
 				"text-summary": ""
-				// "text-lcov": "coverage",
-				// "text": "coverage"
 			}
 		},
 
