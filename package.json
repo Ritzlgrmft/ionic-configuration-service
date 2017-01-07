@@ -13,13 +13,14 @@
 		"build": "npm run clean && npm run tsc",
 		"clean": "rm -rf dist",
 		"commit": "git-cz",
+		"karma": "karma start karma.conf.js",
+		"karma-once": "karma start karma.conf.js --single-run",
 		"lint": "tslint --project tsconfig.json --format verbose --type-check",
-		"test": "karma start karma.conf.js",
-		"test-once": "karma start karma.conf.js --single-run",
+		"test": "npm run lint",
 		"tsc": "npm run tsc-commonjs && npm run tsc-es2015",
 		"tsc-commonjs": "tsc",
 		"tsc-es2015": "tsc --module es2015 --outDir ./dist/es2015",
-		"validate": "npm run test-once && npm run lint",
+		"validate": "npm run karma-once && npm run lint",
 		"semantic-release": "semantic-release pre && npm publish && semantic-release post"
 	},
 	"files": [
