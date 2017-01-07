@@ -1,132 +1,147 @@
-# Common.ConfigurationService
+# ionic-configuration-service
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 This service encapsulates configuration functionalities.
 
-In general, the configuration data in stored in the JavaScript variable `window.__configuration`.
-This variable is defined in the file `www/build/js/env.js`. 
-The source for this file should be stored in a directory called `env`. 
-During the build, the environment sources are copied to the `www/js/build` directory.
+Most apps need some kind of configuration. And often, the configuration data is different
+between the environments:
 
-## Using configuration
+- maybe you want to use different web services in test and production
+- in test, you want to log everything, but in prodiction only errors
+- you want to have all configuration data in one place, so you are able to change something easily
+- ...
 
-Each component should have its own section in the configuration object.
-The structure should be defined in an own interface, e.g.
+The idea is:
 
-    export interface LoggingConfiguration {
-      logLevels?: {
-        loggerName: string;
-        logLevel: string;
-      }[];
-	  ...
-	}
+- add *one* json file containing all the configuration data
+- at *build* this file can be modified (par example you will use a different file in your release build)
+- before the app really starts, the configuration gets loaded
+- whereever you need the configuration data, you can get it via the injected configuration service
 
-Now you can inject the `ConfigurationService` into your app and consume the configuration:
+## Settings file containing the configuration data
 
-    constructor(
-      private configurationService: ConfigurationService) {
-    
-      let configuration = <LoggingConfiguration>this.configurationService.getValue("logging");
-      if (!configuration) {
-        throw "no configuration provided";
-      }
+The settings file is just a JSON file. It contains some keys, whose values can be of any type (either scalar or complex):
 
-      if (configuration.logLevels) {
-        ...
-	    }
-    }
+```json
+{
+  "helloWorld": "Hello World",
+  "secretNumber": 42,
+  "somethingComplex": {
+    "backendUrl": "http://server.com/api"
+  }
+}
+```
 
-## Defining configuration
+## Replace settings file at build time
 
-Add a new file called `env/default.js` to your application. This file contains your default configuration.
-It defines the object `window.__configuration`, which has for each configured component an own property, e.g.:
+Now it gets a little bit tricky: you have a json file in a source directory (e.g. `environments`),
+which should be copied to the `www/assets` directory. A good place to do this is using the copy step of Ionic's build.
+You just need to add a copy statement to `copy.config.js`.
 
-    (function (window) {
-      window.__configuration = window.__configuration || {};
+Unfortunately, the copied file should have always the same name. Otherwise you could not load it in your code.
+On the other side, you want to have several files (with different names) for the different environments.
+The solution is to have separate directories for every environment.
 
-      window.__configuration.logging = {
-        "logLevels": [
-          {
-            "loggerName": "root",
-            "logLevel": "DEBUG"
-          }
-        ]
-      };
+### Folder structure
 
-      window.__configuration.beaconRegions = ...;
+So, in the source, you have the following folder structure:
 
-    } (this));
+![folder structure](docs/FolderStructure.png)
 
-## Environizing configuration
+Just create a new folder below `environments` for every environment you want to support. Be aware that the filename itself
+(`settings.json`) has to be always the same.
 
-As the name of the file above suggests, it contains a default configuration.
-Some of the properties you want to overwrite in specific environments.
-Maybe you want to add a file `env/release.js`, containing the release configuration:
+### Copy correct environment
 
-    (function (window) {
-       window.__configuration.logging = {
-        "logLevels": [
-          {
-            "loggerName": "root",
-            "logLevel": "ERROR"
-          }
-        ]
-      };
+If you do not have an own `copy.config.js`, just create one. For details have a look at
+[Custom configuration of Ionic's app scripts](https://github.com/driftyco/ionic-app-scripts#custom-configuration).
 
-    } (this));
+There you can add your own copy step to `module.exports`:
 
-The configuration above sets the root logger's level to `ERROR` instead of `DEBUG`.
+```JavaScript
+module.exports = {
+  copySettings: {
+    src: ['{{ROOT}}/environments/' + envDirectory + "/settings.json"],
+    dest: '{{WWW}}/assets'
+  },
+  ...
+}
+```
 
-## Building configuration
+As you can see, it simply copies the `settings.json` from `envDirectory` to `www/assets`.
+What is missing so far, is the right value of `envDirectory`, which has to be dynamic.
+Fortunately, `copy.config.js` is just JavaScript. So we can add some logic at the beginning:
 
-All needed configuration files from `env` directory should be combined into one
-file `www/build/js/env.js`. This file, you should include into `www/index.htm`,
-just before the `appBundle.js`:
+```JavaScript
+var envDirectory = "default";
+var envIndex = process.argv.indexOf("--env");
+if (envIndex >= 0 && envIndex < process.argv.length - 1) {
+  envDirectory = process.argv[envIndex + 1];
+}
+```
 
-    <script src="build/js/env.js"></script>
-    <script src="build/js/app.bundle.js"></script>
+As you see, `envDirectory` has a default value of `default`.
+But if you call the build command with the `--env` argument, you can set there another environment.
+If you want to test the release environment in the emulator, you can use:
 
-For the `env.js`, you should add a separate `gulp` task:
+```bash
+ionic emulate --prod --env release
+```
 
-    gulp.task('env', function () {
-      var srcFiles = ["env/default.js"];
-      var envIndex = argv.indexOf("--env");
-      var hostName = require("os").hostname();
-      if (isRelease) {
-        srcFiles.push("env/release.js");
-      } else if (envIndex >= 0 && envIndex < argv.length - 1) {
-        srcFiles.push("env/" + argv[envIndex + 1] + ".js");
-      } else {
-        srcFiles.push("env/" + hostName + ".js");
-      }
-      return gulp
-        .src(srcFiles)
-        .pipe(concat("env.js"))
-        .pipe(gulpif(isRelease, uglify()))
-        .pipe(gulp.dest("www/build/js"));
-      });
+## Load the configuration data
 
-This task concats the files:
+The loading of the configuration data is done in the `AppModule`, before the bootstrapping
+of the `IonicApp`. This is done using [Angular's APP_INITIALIZER](https://github.com/angular/angular/issues/9047):
 
-- `env/default.js`
-- `env/release.js` (only if release build)
-- `env/ENVIRONMENT.js` (if argument `--env ENVIRONMENT` is specified)
-- `env/HOSTNAME.js` (else)
+```TypeScript
 
-The file gets minified only in the release configuration.
+import { APP_INITIALIZER } from "@angular/core";
+import { ConfigurationService } from "@ritzlgrmft/ionic-configuration-service";
 
-**Attention**: on a Mac, it could be that you have to set the host name before.
-You can check the host name with
+@NgModule({
+  ...
+  providers: [
+    ConfigurationService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (configurationService: ConfigurationService) => () => configurationService.load("assets/settings.json"),
+      deps: [ConfigurationService],
+      multi: true
+    },
+    ....
+  ]
+})
+```
 
-    scutil --get HostName
+For `APP_INITIALIZER`, the factory function just loads the configuration data.
+The `multi` parameter is important, because there can be more `APP_INITIALIZER`s.
 
-If you want to change or set it, just use
+## Access the configuration data
 
-    sudo scutil --set HostName ...
+The access to the configuration data is quite easy. Just inject the `ConfigurationService` into your component.
+And call `configurationService.getValue()` later on:
 
-## Methods
+```TypeScript
+constructor(
+  private configurationService: ConfigurationService) {
+}
+
+let secretNumber = this.configurationService.getValue("secretNumber");
+```
+
+## API
+
+### getKeys(): string[]
+
+Get all available keys.
 
 ### getValue(key: string): any
 
 Get the configuration data for the given key.
+
+### load(settingsUrl: string): Promise&lt;void>
+
+Loads the configuration from the given url.
+The returned promise gets resolved as soon as the data is loaded.
+In case of an error, the promise gets rejected.
