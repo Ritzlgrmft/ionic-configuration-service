@@ -1,5 +1,8 @@
 # ionic-configuration-service
 
+[![Build](https://travis-ci.org/Ritzlgrmft/ionic-configuration-service.svg?branch=master)](https://travis-ci.org/Ritzlgrmft/ionic-configuration-service)
+[![Dependencies](https://david-dm.org/ritzlgrmft/ionic-configuration-service/master/status.svg)](https://david-dm.org/ritzlgrmft/ionic-configuration-service/master)
+[![Dev-Dependencies](https://david-dm.org/ritzlgrmft/ionic-configuration-service/master/dev-status.svg)](https://david-dm.org/ritzlgrmft/ionic-configuration-service/master?type=dev)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 This service encapsulates configuration functionalities for apps built with [Ionic framework](http://ionicframework.com).
