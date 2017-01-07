@@ -14,7 +14,6 @@
 		"clean": "rm -rf dist",
 		"commit": "git-cz",
 		"lint": "tslint --project tsconfig.json --format verbose --type-check",
-		"precommit": "npm run validate",
 		"test": "karma start karma.conf.js",
 		"test-once": "karma start karma.conf.js --single-run",
 		"tsc": "npm run tsc-commonjs && npm run tsc-es2015",

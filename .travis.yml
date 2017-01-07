@@ -8,6 +8,9 @@ node_js:
   - '7'
   - '6'
   - '4'
+before_install:
+  - npm i -g npm@3.10.10
+  - export CHROME_BIN=chromium-browser
 before_script:
   - npm prune
 after_success:
