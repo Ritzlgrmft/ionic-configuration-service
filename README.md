@@ -2,7 +2,7 @@
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-This service encapsulates configuration functionalities.
+This service encapsulates configuration functionalities for apps built with [Ionic framework](http://ionicframework.com).
 
 Most apps need some kind of configuration. And often, the configuration data is different
 between the environments:
@@ -128,6 +128,20 @@ constructor(
 }
 
 let secretNumber = this.configurationService.getValue("secretNumber");
+```
+
+Since `getValue()` cannot have a specific return type, it's a good practise to define an interface
+describing your part of the configuration:
+
+```TypeScript
+export interface LoggingConfiguration {
+  logLevels?: {
+    loggerName: string;
+    logLevel: string;
+   }[];
+}
+
+let configuration: LoggingConfiguration = this.configurationService.getValue("logging");
 ```
 
 ## API
