@@ -1,6 +1,6 @@
 {
 	"name": "@ritzlgrmft/ionic-configuration-service",
-	"version": "1.0.0",
+	"version": "0.0.0-development",
 	"description": "Configuration functionalities",
 	"author": {
 		"name": "Markus Wagner",
@@ -20,7 +20,8 @@
 		"tsc": "npm run tsc-commonjs && npm run tsc-es2015",
 		"tsc-commonjs": "tsc",
 		"tsc-es2015": "tsc --module es2015 --outDir ./dist/es2015",
-		"validate": "npm run test-once && npm run lint"
+		"validate": "npm run test-once && npm run lint",
+		"semantic-release": "semantic-release pre && npm publish && semantic-release post"
 	},
 	"files": [
 		"dist"
@@ -55,7 +56,8 @@
 		"reflect-metadata": "0.1.8",
 		"requirejs": "2.3.2",
 		"tslint": "4.3.1",
-		"typescript": "2.0.9"
+		"typescript": "2.0.9",
+		"semantic-release": "6.3.2"
 	},
 	"config": {
 		"commitizen": {
