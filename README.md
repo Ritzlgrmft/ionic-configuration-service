@@ -95,9 +95,8 @@ The loading of the configuration data is done in the `AppModule`, before the boo
 of the `IonicApp`. This is done using [Angular's APP_INITIALIZER](https://github.com/angular/angular/issues/9047):
 
 ```TypeScript
-
 import { APP_INITIALIZER } from "@angular/core";
-import { ConfigurationService } from "@ritzlgrmft/ionic-configuration-service";
+import { ConfigurationService } from "ionic-configuration-service";
 
 @NgModule({
   ...

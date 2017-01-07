@@ -1,5 +1,5 @@
 {
-	"name": "@ritzlgrmft/ionic-configuration-service",
+	"name": "ionic-configuration-service",
 	"version": "0.0.0-development",
 	"description": "Configuration functionalities",
 	"author": {
