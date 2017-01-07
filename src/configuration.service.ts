@@ -4,21 +4,27 @@ import { Http } from "@angular/http";
 
 import "rxjs/add/operator/toPromise";
 
+/**
+ * Service which encapsulates configuration functionalities for apps built with Ionic framework.
+ */
 @Injectable()
 export class ConfigurationService {
 
 	constructor(private http: Http) {
 	}
 
+	/**
+	 * Internal storage of the configuration data.
+	 */
 	private configValues: { [key: string]: any };
 
 	/**
 	 * Get all available keys.
 	 */
 	public getKeys(): string[] {
-		let keys: string[] = [];
+		const keys: string[] = [];
 		// tslint:disable-next-line:forin
-		for (let key in this.configValues) {
+		for (const key in this.configValues) {
 			keys.push(key);
 		}
 		return keys;
@@ -28,7 +34,7 @@ export class ConfigurationService {
 	 * Get the configuration data for the given key.
 	 */
 	public getValue(key: string): any {
-		if (this.configValues) {
+		if (this.configValues !== undefined) {
 			return this.configValues[key];
 		} else {
 			return undefined;
@@ -39,7 +45,7 @@ export class ConfigurationService {
 	 * Loads the configuration from the given url.
 	 */
 	public load(settingsUrl: string): Promise<void> {
-		let promise = this.http
+		const promise = this.http
 			.get(settingsUrl)
 			.toPromise()
 			.then(response => {
