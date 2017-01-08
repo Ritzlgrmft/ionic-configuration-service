@@ -29,6 +29,7 @@ module.exports = function (config) {
 			reports:
 			{
 				"html": "coverage",
+				"json": "coverage",
 				"lcovonly": "coverage",
 				"text-summary": ""
 			}
