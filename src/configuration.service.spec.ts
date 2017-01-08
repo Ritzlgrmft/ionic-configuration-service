@@ -6,6 +6,11 @@ import { ConfigurationService } from "./configuration.service";
 
 describe("ConfigurationService", () => {
 
+	interface ComplexObject {
+		prop1: number;
+		prop2: string;
+	}
+
 	let configurationService: ConfigurationService;
 
 	beforeEach(() => {
@@ -94,7 +99,7 @@ describe("ConfigurationService", () => {
 
 		it("returns value of existing simple string", done => {
 			configurationService.load("settings.json").then(() => {
-				let value = configurationService.getValue("simpleString");
+				let value = configurationService.getValue<string>("simpleString");
 				expect(value).toBe("abc");
 				done();
 			});
@@ -102,7 +107,7 @@ describe("ConfigurationService", () => {
 
 		it("returns value of existing simple number", done => {
 			configurationService.load("settings.json").then(() => {
-				let value = configurationService.getValue("simpleNumber");
+				let value = configurationService.getValue<number>("simpleNumber");
 				expect(value).toBe(42);
 				done();
 			});
@@ -110,7 +115,7 @@ describe("ConfigurationService", () => {
 
 		it("returns value of existing complex object", done => {
 			configurationService.load("settings.json").then(() => {
-				let value = configurationService.getValue("complexObject");
+				let value = configurationService.getValue<ComplexObject>("complexObject");
 				expect(value.prop1).toBe(1);
 				expect(value.prop2).toBe("x");
 				done();

@@ -20,6 +20,7 @@ export class ConfigurationService {
 
 	/**
 	 * Get all available keys.
+	 * @returns all available keys
 	 */
 	public getKeys(): string[] {
 		const keys: string[] = [];
@@ -32,8 +33,11 @@ export class ConfigurationService {
 
 	/**
 	 * Get the configuration data for the given key.
+	 * @param T type of the returned value (default: object)
+	 * @param key key of the configuration data
+	 * @returns configuration data for the given key
 	 */
-	public getValue(key: string): any {
+	public getValue<T>(key: string): T {
 		if (this.configValues !== undefined) {
 			return this.configValues[key];
 		} else {
@@ -43,16 +47,18 @@ export class ConfigurationService {
 
 	/**
 	 * Loads the configuration from the given url.
+	 * @param configurationUrl url from which the configuration should be loaded
+	 * @returns promise which gets resolved as soon as the data is loaded; in case of an error, the promise gets rejected
 	 */
-	public load(settingsUrl: string): Promise<void> {
+	public load(configurationUrl: string): Promise<void> {
 		const promise = this.http
-			.get(settingsUrl)
+			.get(configurationUrl)
 			.toPromise()
 			.then(response => {
 				if (response.ok) {
 					this.configValues = response.json();
 				} else {
-					throw new Error(`${settingsUrl} could not be loaded: ${response.status}`);
+					throw new Error(`${configurationUrl} could not be loaded: ${response.status}`);
 				}
 			});
 		return promise;

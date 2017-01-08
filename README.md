@@ -129,10 +129,10 @@ constructor(
   private configurationService: ConfigurationService) {
 }
 
-let secretNumber = this.configurationService.getValue("secretNumber");
+let secretNumber = this.configurationService.getValue<number>("secretNumber");
 ```
 
-Since `getValue()` cannot have a specific return type, it's a good practise to define an interface
+For more complex configuration, it's a good practise to define an interface
 describing your part of the configuration:
 
 ```TypeScript
@@ -143,7 +143,7 @@ export interface LoggingConfiguration {
    }[];
 }
 
-let configuration: LoggingConfiguration = this.configurationService.getValue("logging");
+let configuration = this.configurationService.getValue<LoggingConfiguration>("logging");
 ```
 
 ## API
@@ -152,12 +152,32 @@ let configuration: LoggingConfiguration = this.configurationService.getValue("lo
 
 Get all available keys.
 
-### getValue(key: string): any
+Returns
+
+- all available keys
+
+### getValue&lt;T>(key: string): T
 
 Get the configuration data for the given key.
 
-### load(settingsUrl: string): Promise&lt;void>
+Parameters
+
+- *T*: type of the returned value (default: object)
+- *key*: key of the configuration data
+
+Returns
+
+- configuration data for the given key
+
+### load(configurationUrl: string): Promise&lt;void>
 
 Loads the configuration from the given url.
-The returned promise gets resolved as soon as the data is loaded.
-In case of an error, the promise gets rejected.
+
+Parameters
+
+- *configurationUrl* url from which the configuration should be loaded
+
+Returns
+
+- promise which gets resolved as soon as the data is loaded;
+  in case of an error, the promise gets rejected
