@@ -1,7 +1,7 @@
 {
 	"name": "ionic-configuration-service",
 	"version": "0.0.0-development",
-	"description": "Configuration functionalities",
+	"description": "Configuration functionalities for apps built with Ionic framework",
 	"author": {
 		"name": "Markus Wagner",
 		"email": "markus.wagner02@web.de"
