@@ -16,7 +16,7 @@
 		"karma": "karma start karma.conf.js",
 		"karma-once": "karma start karma.conf.js --single-run",
 		"lint": "tslint --project tsconfig.json --format verbose --type-check",
-		"test": "npm run lint",
+		"test": "npm run tsc && npm run lint",
 		"tsc": "npm run tsc-commonjs && npm run tsc-es2015",
 		"tsc-commonjs": "tsc",
 		"tsc-es2015": "tsc --module es2015 --outDir ./dist/es2015",
