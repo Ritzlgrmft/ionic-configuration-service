@@ -1,9 +1,13 @@
 # ionic-configuration-service
 
 [![Build](https://travis-ci.org/Ritzlgrmft/ionic-configuration-service.svg?branch=master)](https://travis-ci.org/Ritzlgrmft/ionic-configuration-service)
+[![Codecov](https://codecov.io/gh/Ritzlgrmft/ionic-configuration-service/branch/master/graph/badge.svg)](https://codecov.io/gh/Ritzlgrmft/ionic-configuration-service)
+[![Version](https://badge.fury.io/js/ionic-configuration-service.svg)](https://www.npmjs.com/package/ionic-configuration-service)
+[![Downloads](https://img.shields.io/npm/dt/ionic-configuration-service.svg)](https://www.npmjs.com/package/ionic-configuration-service)
 [![Dependencies](https://david-dm.org/ritzlgrmft/ionic-configuration-service/master/status.svg)](https://david-dm.org/ritzlgrmft/ionic-configuration-service/master)
 [![Dev-Dependencies](https://david-dm.org/ritzlgrmft/ionic-configuration-service/master/dev-status.svg)](https://david-dm.org/ritzlgrmft/ionic-configuration-service/master?type=dev)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![License](https://img.shields.io/npm/l/ionic-configuration-service.svg)](https://www.npmjs.com/package/ionic-configuration-service)
 
 This service encapsulates configuration functionalities for apps built with [Ionic framework](http://ionicframework.com).
 
