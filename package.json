@@ -9,6 +9,11 @@
 	"repository": "https://github.com/Ritzlgrmft/ionic-configuration-service.git",
 	"license": "MIT",
 	"private": false,
+	"keywords": [
+		"ionic",
+		"configuration",
+		"environizing"
+	],
 	"scripts": {
 		"build": "npm run clean && npm run tsc",
 		"clean": "rm -rf dist",
