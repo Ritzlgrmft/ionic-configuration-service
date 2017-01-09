@@ -5,7 +5,8 @@ module.exports = function (config) {
 
 		files: [
 			{ pattern: "base.spec.ts" },
-			{ pattern: "src/**/*.+(ts|html)" }
+			{ pattern: "src/**/*.+(ts|html)" },
+			"node_modules/reflect-metadata/Reflect.js"
 		],
 
 		exclude: [
