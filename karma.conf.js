@@ -30,7 +30,10 @@ module.exports = function (config) {
 			reports:
 			{
 				"html": "coverage",
-				"lcovonly": "coverage",
+				"lcovonly": {
+					"directory": "coverage",
+					"filename": "lcovonly/lcov.info"
+				},
 				"text-summary": ""
 			}
 		},
