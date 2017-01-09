@@ -12,3 +12,6 @@ after_success:
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
+notifications:
+  email:
+    on_success: always # default: change
