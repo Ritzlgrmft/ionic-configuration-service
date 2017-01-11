@@ -1,4 +1,5 @@
-﻿import { inject, TestBed } from "@angular/core/testing";
+﻿// tslint:disable:no-magic-numbers
+import { inject, TestBed } from "@angular/core/testing";
 import { BaseRequestOptions, Http, Response, ResponseOptions } from "@angular/http";
 import { MockBackend, MockConnection } from "@angular/http/testing";
 
@@ -31,7 +32,7 @@ describe("ConfigurationService", () => {
 	});
 
 	beforeEach(inject([MockBackend], (backend: MockBackend) => {
-		let configuration = {
+		const configuration = {
 			"simpleString": "abc",
 			"simpleNumber": 42,
 			"complexObject": {
@@ -93,13 +94,13 @@ describe("ConfigurationService", () => {
 	describe("getValue(key: string): any", () => {
 
 		it("returns undefined if configuration is not loaded", () => {
-			let value = configurationService.getValue("xxx");
+			const value = configurationService.getValue("xxx");
 			expect(value).toBeUndefined();
 		});
 
 		it("returns value of existing simple string", done => {
 			configurationService.load("settings.json").then(() => {
-				let value = configurationService.getValue<string>("simpleString");
+				const value = configurationService.getValue<string>("simpleString");
 				expect(value).toBe("abc");
 				done();
 			});
@@ -107,7 +108,7 @@ describe("ConfigurationService", () => {
 
 		it("returns value of existing simple number", done => {
 			configurationService.load("settings.json").then(() => {
-				let value = configurationService.getValue<number>("simpleNumber");
+				const value = configurationService.getValue<number>("simpleNumber");
 				expect(value).toBe(42);
 				done();
 			});
@@ -115,7 +116,7 @@ describe("ConfigurationService", () => {
 
 		it("returns value of existing complex object", done => {
 			configurationService.load("settings.json").then(() => {
-				let value = configurationService.getValue<ComplexObject>("complexObject");
+				const value = configurationService.getValue<ComplexObject>("complexObject");
 				expect(value.prop1).toBe(1);
 				expect(value.prop2).toBe("x");
 				done();
@@ -124,7 +125,7 @@ describe("ConfigurationService", () => {
 
 		it("returns undefined if key does not exist", done => {
 			configurationService.load("settings.json").then(() => {
-				let value = configurationService.getValue("unknown");
+				const value = configurationService.getValue("unknown");
 				expect(value).toBeUndefined();
 				done();
 			});
@@ -135,7 +136,7 @@ describe("ConfigurationService", () => {
 
 		it("returns all keys from settings", done => {
 			configurationService.load("settings.json").then(() => {
-				let keys = configurationService.getKeys();
+				const keys = configurationService.getKeys();
 				expect(keys.length).toBe(3);
 				expect(keys).toEqual(["simpleString", "simpleNumber", "complexObject"]);
 				done();
