@@ -7,6 +7,7 @@
 [![Version](https://badge.fury.io/js/ionic-configuration-service.svg)](https://www.npmjs.com/package/ionic-configuration-service)
 [![Downloads](https://img.shields.io/npm/dt/ionic-configuration-service.svg)](https://www.npmjs.com/package/ionic-configuration-service)
 [![Dependencies](https://david-dm.org/ritzlgrmft/ionic-configuration-service/master/status.svg)](https://david-dm.org/ritzlgrmft/ionic-configuration-service/master)
+[![Peer-Dependencies](https://david-dm.org/ritzlgrmft/ionic-configuration-service/master/peer-status.svg)](https://david-dm.org/ritzlgrmft/ionic-configuration-service/master?type=peer)
 [![Dev-Dependencies](https://david-dm.org/ritzlgrmft/ionic-configuration-service/master/dev-status.svg)](https://david-dm.org/ritzlgrmft/ionic-configuration-service/master?type=dev)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![License](https://img.shields.io/npm/l/ionic-configuration-service.svg)](https://www.npmjs.com/package/ionic-configuration-service)
