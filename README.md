@@ -1,6 +1,6 @@
 # ionic-configuration-service
 
-**The dependencies used by the latest version are the same as needed for [Ionic 2.0.0-rc.5](https://github.com/driftyco/ionic/blob/master/CHANGELOG.md#200-rc5-2017-01-11).**
+**The dependencies used by the latest version are the same as needed for [Ionic 2.0.0](https://github.com/driftyco/ionic/blob/master/CHANGELOG.md).**
 
 [![Build](https://travis-ci.org/Ritzlgrmft/ionic-configuration-service.svg?branch=master)](https://travis-ci.org/Ritzlgrmft/ionic-configuration-service)
 [![Codecov](https://codecov.io/gh/Ritzlgrmft/ionic-configuration-service/branch/master/graph/badge.svg)](https://codecov.io/gh/Ritzlgrmft/ionic-configuration-service)
