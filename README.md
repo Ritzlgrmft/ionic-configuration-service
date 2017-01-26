@@ -18,7 +18,7 @@ Most apps need some kind of configuration. And often, the configuration data is 
 between the environments:
 
 - maybe you want to use different web services in test and production
-- in test, you want to log everything, but in prodiction only errors
+- in test, you want to log everything, but in production only errors
 - you want to have all configuration data in one place, so you are able to change something easily
 - ...
 
