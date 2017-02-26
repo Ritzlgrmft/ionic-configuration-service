@@ -108,13 +108,17 @@ of the `IonicApp`. This is done using [Angular's APP_INITIALIZER](https://github
 import { APP_INITIALIZER } from "@angular/core";
 import { ConfigurationService } from "ionic-configuration-service";
 
+export function loadConfiguration(configurationService: ConfigurationService): () => Promise<void> {
+  return () => configurationService.load("assets/settings.json");
+}
+
 @NgModule({
   ...
   providers: [
     ConfigurationService,
     {
       provide: APP_INITIALIZER,
-      useFactory: (configurationService: ConfigurationService) => () => configurationService.load("assets/settings.json"),
+      useFactory: loadConfiguration,
       deps: [ConfigurationService],
       multi: true
     },
@@ -125,6 +129,9 @@ import { ConfigurationService } from "ionic-configuration-service";
 
 For `APP_INITIALIZER`, the factory function just loads the configuration data.
 The `multi` parameter is important, because there can be more `APP_INITIALIZER`s.
+
+The factory function `loadConfiguration()` is needed, since otherwise the angular compiler `ngc`
+could not compile the module.
 
 ## Access the configuration data
 
