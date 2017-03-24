@@ -10,13 +10,13 @@ import "rxjs/add/operator/toPromise";
 @Injectable()
 export class ConfigurationService {
 
-	constructor(private http: Http) {
-	}
-
 	/**
 	 * Internal storage of the configuration data.
 	 */
 	private configValues: { [key: string]: any };
+
+	constructor(private http: Http) {
+	}
 
 	/**
 	 * Get all available keys.
@@ -54,7 +54,7 @@ export class ConfigurationService {
 		const promise = this.http
 			.get(configurationUrl)
 			.toPromise()
-			.then(response => {
+			.then((response) => {
 				if (response.ok) {
 					this.configValues = response.json();
 				} else {

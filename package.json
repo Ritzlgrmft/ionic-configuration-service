@@ -22,7 +22,7 @@
 		"compile": "ngc -p tsconfig.aot.json",
 		"karma": "karma start karma.conf.js --browsers Chrome",
 		"karma-once": "karma start karma.conf.js --browsers PhantomJS --single-run",
-		"lint": "tslint --project tsconfig.no-types-excluded.json --config tslint.typecheck.json --format verbose --type-check --exclude \"**/*.spec.ts\"",
+		"lint": "tslint --project tsconfig.no-types-excluded.json --format verbose --type-check --exclude \"**/*.spec.ts\"",
 		"report-coverage": "codecov",
 		"semantic-release": "semantic-release pre && npm publish && semantic-release post",
 		"test": "npm run compile && npm run lint && npm run karma-once"
