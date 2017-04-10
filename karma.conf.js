@@ -1,5 +1,5 @@
 module.exports = function (config) {
-	config.set({
+	var configuration = {
 
 		frameworks: ["jasmine", "karma-typescript", "es6-shim"],
 
@@ -82,6 +82,19 @@ module.exports = function (config) {
 
 		// Concurrency level
 		// how many browser should be started simultaneous
-		concurrency: Infinity
-	});
+		concurrency: Infinity,
+
+		customLaunchers: {
+			Chrome_travis_ci: {
+				base: 'Chrome',
+				flags: ['--no-sandbox']
+			}
+		},
+	};
+
+	if (process.env.TRAVIS) {
+		configuration.browsers = ['Chrome_travis_ci'];
+	}
+
+	config.set(configuration);
 }
