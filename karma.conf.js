@@ -37,6 +37,14 @@ module.exports = function (config) {
 			},
 			compilerOptions: {
 				"target": "es5",
+				"lib": [
+					"dom",
+					"es2015",
+					"es2015.iterable"
+				],
+				"types": [
+					"jasmine"
+				],
 				"module": "commonjs",
 				"moduleResolution": "node",
 				"emitDecoratorMetadata": true,
