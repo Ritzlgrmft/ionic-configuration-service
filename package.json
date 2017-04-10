@@ -25,7 +25,7 @@
 		"lint": "tslint --project tsconfig.json --format verbose --type-check --exclude \"**/*.spec.ts\"",
 		"report-coverage": "codecov",
 		"semantic-release": "semantic-release pre && npm publish && semantic-release post",
-		"test": "npm run compile && npm run lint" // && npm run karma-once"
+		"test": "npm run compile && npm run lint"
 	},
 	"files": [
 		"dist",
