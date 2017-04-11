@@ -1,11 +1,12 @@
 module.exports = function (config) {
 	var configuration = {
 
-		frameworks: ["jasmine", "karma-typescript", "es6-shim"],
+		frameworks: ["jasmine", "karma-typescript"],
 
 		files: [
 			{ pattern: "src/**/*.+(ts|html)" },
-			"node_modules/reflect-metadata/Reflect.js"
+			"node_modules/reflect-metadata/Reflect.js",
+			"node_modules/babel-polyfill/dist/polyfill.js"
 		],
 
 		exclude: [
@@ -39,11 +40,7 @@ module.exports = function (config) {
 				"target": "es5",
 				"lib": [
 					"dom",
-					"es2015",
-					"es2015.iterable"
-				],
-				"types": [
-					"jasmine"
+					"es2015"
 				],
 				"module": "commonjs",
 				"moduleResolution": "node",
@@ -83,18 +80,7 @@ module.exports = function (config) {
 		// Concurrency level
 		// how many browser should be started simultaneous
 		concurrency: Infinity,
-
-		customLaunchers: {
-			Chrome_travis_ci: {
-				base: 'Chrome',
-				flags: ['--no-sandbox']
-			}
-		},
 	};
-
-	if (process.env.TRAVIS) {
-		configuration.browsers = ['Chrome_travis_ci'];
-	}
 
 	config.set(configuration);
 }

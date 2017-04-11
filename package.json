@@ -17,15 +17,15 @@
 	],
 	"scripts": {
 		"build": "npm run clean && npm run compile",
-		"clean": "cd dist && ls | grep -v .npmignore | xargs rm && cd ..",
+		"clean": "cd dist && ls | grep -v .npmignore | xargs rm && cd .. && rm -r aot",
 		"commit": "git-cz",
 		"compile": "ngc -p tsconfig.aot.json",
 		"karma": "karma start karma.conf.js --browsers Chrome",
-		"karma-once": "karma start karma.conf.js --browsers Chrome --single-run",
+		"karma-once": "karma start karma.conf.js --browsers PhantomJS --single-run",
 		"lint": "tslint --project tsconfig.json --format verbose --type-check --exclude \"**/*.spec.ts\"",
 		"report-coverage": "codecov",
 		"semantic-release": "semantic-release pre && npm publish && semantic-release post",
-		"test": "npm run compile && npm run lint"
+		"test": "npm run compile && npm run lint && npm run karma-once"
 	},
 	"files": [
 		"dist",
@@ -50,7 +50,6 @@
 		"@angular/platform-browser-dynamic": "4.0.0",
 		"rxjs": "5.1.1",
 		"zone.js": "0.8.4",
-		"@types/es6-shim": "0.31.32",
 		"@types/jasmine": "2.5.41",
 		"codecov": "2.1.0",
 		"codelyzer": "3.0.0-beta.4",
@@ -59,7 +58,6 @@
 		"jasmine-core": "2.5.2",
 		"karma": "1.6.0",
 		"karma-chrome-launcher": "2.0.0",
-		"karma-es6-shim": "1.0.0",
 		"karma-jasmine": "1.1.0",
 		"karma-phantomjs-launcher": "1.0.4",
 		"karma-typescript": "3.0.0",
