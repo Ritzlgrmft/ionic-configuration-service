@@ -8,6 +8,9 @@
 			true,
 			"tabs"
 		],
+		"interface-name": [
+			false
+		],
 		"directive-selector": [
 			true,
 			"attribute",

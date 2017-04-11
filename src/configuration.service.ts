@@ -50,17 +50,12 @@ export class ConfigurationService {
 	 * @param configurationUrl url from which the configuration should be loaded
 	 * @returns promise which gets resolved as soon as the data is loaded; in case of an error, the promise gets rejected
 	 */
-	public load(configurationUrl: string): Promise<void> {
-		const promise = this.http
-			.get(configurationUrl)
-			.toPromise()
-			.then((response) => {
-				if (response.ok) {
-					this.configValues = response.json();
-				} else {
-					throw new Error(`${configurationUrl} could not be loaded: ${response.status}`);
-				}
-			});
-		return promise;
+	public async load(configurationUrl: string): Promise<void> {
+		let response = await this.http.get(configurationUrl).toPromise();
+		if (response.ok) {
+			this.configValues = response.json();
+		} else {
+			throw new Error(`${configurationUrl} could not be loaded: ${response.status}`);
+		}
 	}
 }
