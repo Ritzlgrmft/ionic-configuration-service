@@ -51,7 +51,7 @@ export class ConfigurationService {
 	 * @returns promise which gets resolved as soon as the data is loaded; in case of an error, the promise gets rejected
 	 */
 	public async load(configurationUrl: string): Promise<void> {
-		let response = await this.http.get(configurationUrl).toPromise();
+		const response = await this.http.get(configurationUrl).toPromise();
 		if (response.ok) {
 			this.configValues = response.json();
 		} else {
