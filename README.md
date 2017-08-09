@@ -110,6 +110,7 @@ of the `IonicApp`. This is done using [Angular's APP_INITIALIZER](https://github
 
 ```TypeScript
 import { APP_INITIALIZER } from "@angular/core";
+import { HttpModule } from "@angular/http";
 import { ConfigurationService } from "ionic-configuration-service";
 
 export function loadConfiguration(configurationService: ConfigurationService): () => Promise<void> {
@@ -118,6 +119,10 @@ export function loadConfiguration(configurationService: ConfigurationService): (
 
 @NgModule({
   ...
+  imports: [
+    ...
+    HttpModule,
+  ],
   providers: [
     ConfigurationService,
     {
