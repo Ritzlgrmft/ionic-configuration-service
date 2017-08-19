@@ -88,20 +88,27 @@ What is missing so far, is the right value of `envDirectory`, which has to be dy
 Fortunately, `copy.config.js` is just JavaScript. So we can add some logic at the beginning:
 
 ```JavaScript
-var envDirectory = "default";
-var envIndex = process.argv.indexOf("--env");
-if (envIndex >= 0 && envIndex < process.argv.length - 1) {
-  envDirectory = process.argv[envIndex + 1];
-}
+var envDirectory = process.env.env || "default";
+process.stdout.write("using environment '" + envDirectory + "'\n");
 ```
 
 As you see, `envDirectory` has a default value of `default`.
-But if you call the build command with the `--env` argument, you can set there another environment.
+But if you specify a value for the environment variable `env`, you can set there another environment.
 If you want to test the release environment in the emulator, you can use:
 
 ```bash
-ionic emulate --prod --env release
+export env=release
+ionic emulate --prod
 ```
+
+Or even shorter:
+
+```bash
+env=release ionic emulate --prod
+```
+
+Side note: my former solution with `--env` argument does no longer work, since the Ionic
+commands spawn internally new node processes which do not get the additional argument.
 
 ## Load the configuration data
 
