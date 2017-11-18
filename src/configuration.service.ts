@@ -1,8 +1,6 @@
 ﻿import { Injectable } from "@angular/core";
 
-import { Http } from "@angular/http";
-
-import "rxjs/add/operator/toPromise";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
 /**
  * Service which encapsulates configuration functionalities for apps built with Ionic framework.
@@ -15,7 +13,7 @@ export class ConfigurationService {
 	 */
 	private configValues: { [key: string]: any };
 
-	constructor(private http: Http) {
+	constructor(private httpClient: HttpClient) {
 	}
 
 	/**
@@ -38,7 +36,7 @@ export class ConfigurationService {
 	 * @returns configuration data for the given key
 	 */
 	public getValue<T>(key: string): T {
-		if (this.configValues !== undefined) {
+		if (this.configValues) {
 			return this.configValues[key];
 		} else {
 			return undefined;
@@ -51,11 +49,10 @@ export class ConfigurationService {
 	 * @returns promise which gets resolved as soon as the data is loaded; in case of an error, the promise gets rejected
 	 */
 	public async load(configurationUrl: string): Promise<void> {
-		const response = await this.http.get(configurationUrl).toPromise();
-		if (response.ok) {
-			this.configValues = response.json();
-		} else {
-			throw new Error(`${configurationUrl} could not be loaded: ${response.status}`);
+		try {
+			this.configValues = await this.httpClient.get<{ [key: string]: any }>(configurationUrl).toPromise();
+		} catch (e) {
+			throw new Error(`${configurationUrl} could not be loaded: ${(e as HttpErrorResponse).status}`);
 		}
 	}
 }

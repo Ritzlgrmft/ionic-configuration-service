@@ -73,7 +73,7 @@ Just create a new folder below `environments` for every environment you want to 
 ### Copy correct environment
 
 If you do not have an own `copy.config.js`, just create one. For details have a look at
-[Custom configuration of Ionic's app scripts](https://github.com/driftyco/ionic-app-scripts#custom-configuration).
+[Custom configuration of Ionic's app scripts](https://github.com/ionic-team/ionic-app-scripts#custom-configuration).
 
 There you can add your own copy step to `module.exports`:
 
@@ -120,8 +120,8 @@ The loading of the configuration data is done in the `AppModule`, before the boo
 of the `IonicApp`. This is done using [Angular's APP_INITIALIZER](https://github.com/angular/angular/issues/9047):
 
 ```TypeScript
+import { HttpClientModule } from "@angular/common/http";
 import { APP_INITIALIZER } from "@angular/core";
-import { HttpModule } from "@angular/http";
 import { ConfigurationService } from "ionic-configuration-service";
 
 export function loadConfiguration(configurationService: ConfigurationService): () => Promise<void> {
@@ -132,7 +132,7 @@ export function loadConfiguration(configurationService: ConfigurationService): (
   ...
   imports: [
     ...
-    HttpModule,
+    HttpClientModule,
   ],
   providers: [
     ConfigurationService,
