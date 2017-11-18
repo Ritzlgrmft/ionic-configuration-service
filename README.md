@@ -1,9 +1,10 @@
 # ionic-configuration-service
 
-**The dependencies used by the latest version are the same as needed for [Ionic 3.0.0](https://github.com/driftyco/ionic/blob/master/CHANGELOG.md). For older versions use:**
+**The dependencies used by the latest version are the same as needed for [Ionic 3.9.0](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
 
 | ionic-configuration-service | Ionic | Angular
 | ----- | -------- | ------
+| 6.0.0 | >= 3.9.0 | ^5.0.0
 | 5.0.0 | >= 3.0.0 | ^4.0.0
 | 4.0.0 | >= 2.2.0 | ^2.4.8
 | 3.1.1 | >= 2.0.0 | ^2.2.1
