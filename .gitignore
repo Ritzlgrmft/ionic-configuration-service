@@ -1,4 +1,3 @@
-aot/
 coverage/
 dist/**/*.d.ts
 dist/**/*.js

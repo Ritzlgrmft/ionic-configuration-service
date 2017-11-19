@@ -17,7 +17,7 @@
 	],
 	"scripts": {
 		"build": "npm run clean && npm run compile",
-		"clean": "cd dist && ls | grep -v .npmignore | xargs rm && cd .. && rm -r aot",
+		"clean": "cd dist && ls | grep -v .npmignore | xargs rm && cd ..",
 		"commit": "git-cz",
 		"compile": "ngc -p tsconfig.aot.json",
 		"karma": "karma start karma.conf.js --browsers Chrome",
